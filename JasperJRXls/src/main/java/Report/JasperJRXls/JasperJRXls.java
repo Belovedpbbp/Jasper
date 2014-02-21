@@ -29,6 +29,10 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class JasperJRXls {
 
+	private JasperExportManager exportManager;
+	
+	private JasperViewer jasperViewer;
+
 	public static JasperPrint printReport() {
 
 		InputStream reportFileName = ClassLoader.class
@@ -80,18 +84,18 @@ public class JasperJRXls {
 
 	}
 
-	// public static JasperViewer viewReport() {
-	// printReport();
-	//
-	// JasperViewer.viewReport(printReport(), false);
-	// // return viewReport();
-	// return viewReport();
-	// }
+	 public static JasperViewer viewReport() {
+	 printReport();
+	
+	 JasperViewer.viewReport(printReport(), false);
+	 // return viewReport();
+	 return viewReport();
+	 }
 
 	public static void main(String[] args) {
 		exportManager();
 
-		// viewReport();
+		 viewReport();
 
 	}
 
