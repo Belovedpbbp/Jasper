@@ -29,24 +29,19 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class JasperJRXls {
 
-	private JasperExportManager exportManager;
-	
-	private JasperViewer jasperViewer;
-
-	public static JasperPrint printReport() {
+	public JasperPrint printReport() {
 
 		InputStream reportFileName = ClassLoader.class
-
-		.getResourceAsStream("/blank1.jrxml");
+				.getResourceAsStream("/blank1.jrxml");
 
 		InputStream xlsFileName = ClassLoader.class
 				.getResourceAsStream("/data.xls");
 
-		JasperReport sourceFileName;
 		JasperPrint jasperPrint = null;
 
 		try {
-			sourceFileName = JasperCompileManager.compileReport(reportFileName);
+			JasperReport sourceFileName = JasperCompileManager
+					.compileReport(reportFileName);
 			JRXlsDataSource source = new JRXlsDataSource(xlsFileName);
 			source.setColumnNames(new String[] { "name", "ages", "like" },
 					new int[] { 0, 1, 2 });
@@ -57,7 +52,6 @@ public class JasperJRXls {
 
 			jasperPrint = JasperFillManager.fillReport(sourceFileName,
 					parameters, source);
-
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,37 +60,31 @@ public class JasperJRXls {
 			e.printStackTrace();
 		}
 		return jasperPrint;
-
 	}
 
-	public static JasperExportManager exportManager() {
+	public void exportManager() {
 
 		printReport();
 		try {
 			JasperExportManager.exportReportToHtmlFile(printReport(),
-					"D:/Coop/JasperReport/Export/nnoob.html");
+					"D:/Coop/JasperReport/Export/Hello.html");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// return exportManager();
-		return exportManager();
 
 	}
 
-	 public static JasperViewer viewReport() {
-	 printReport();
-	
-	 JasperViewer.viewReport(printReport(), false);
-	 // return viewReport();
-	 return viewReport();
-	 }
+	public void viewer() {
+		printReport();
+		JasperViewer.viewReport(printReport(), false);
+
+	}
 
 	public static void main(String[] args) {
-		exportManager();
+		JasperJRXls jasperJRXls = new JasperJRXls();
+		jasperJRXls.exportManager();
 
-		 viewReport();
-
+		jasperJRXls.viewer();
 	}
-
 }
