@@ -29,7 +29,17 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class JasperJRXls {
 
-	public JasperPrint printReport() {
+	public static void main(String[] args) {
+		GenReport genReport = new GenReport();
+		genReport.exportManager();
+		genReport.viewer();
+	}
+
+}
+
+class GenReport {
+
+	public static JasperPrint printReport() {
 
 		InputStream reportFileName = ClassLoader.class
 				.getResourceAsStream("/blank1.jrxml");
@@ -63,28 +73,16 @@ public class JasperJRXls {
 	}
 
 	public void exportManager() {
-
-		printReport();
 		try {
 			JasperExportManager.exportReportToHtmlFile(printReport(),
-					"D:/Coop/JasperReport/Export/Hello.html");
+					"D:/Coop/JasperReport/Export/ReportTest.html");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void viewer() {
-		printReport();
 		JasperViewer.viewReport(printReport(), false);
-
-	}
-
-	public static void main(String[] args) {
-		JasperJRXls jasperJRXls = new JasperJRXls();
-		jasperJRXls.exportManager();
-
-		jasperJRXls.viewer();
 	}
 }
